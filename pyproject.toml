@@ -1,0 +1,55 @@
+[tool.poetry]
+packages = [{ include = "composite_tests", from = "src" }]
+name = "composite-testing"
+version = "0.1.0"
+description = ""
+authors = ["Oscar Key <oscar.t.key@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+# scipy specifies 3.13 as its max version, so we have to too :(
+python = ">=3.10, <3.13"
+tqdm = "^4.64.1"
+jax = { extras = ["cuda12_pip"], version = "~0.4" }
+numpy = "^1.24.3"
+optax = "^0.1.5"
+jaxopt = "^0.7"
+chex = "^0.1.7"
+scipy = "^1.10.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3.1"
+pytest-xdist = "^3.3.1"
+mypy = "^1.4.1"
+black = "^23.3.0"
+isort = "^5.12.0"
+
+[tool.poetry.group.experiments]
+# This group contains everything needed for the experiments package, which is used to
+# reproduce the experiments from the paper
+optional = true
+
+[tool.poetry.group.experiments.dependencies]
+seaborn = "^0.12.2"
+rdata = "^0.9"
+matplotlib = "^3.7.1"
+typed-argument-parser = "^1.7.2"
+matplotlib-label-lines = "^0.5.1"
+statsmodels = "^0.14.0"
+pandas = "^2.0.2"
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
+
+[[tool.poetry.source]]
+name = "jax_cuda"
+url = "https://storage.googleapis.com/jax-releases/jax_cuda_releases.html"
+priority = "supplemental"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
