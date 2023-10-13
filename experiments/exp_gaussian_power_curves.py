@@ -495,7 +495,7 @@ def _exp_increasing_d(runner: ExperimentRunner, bootstrap: Bootstrap) -> None:
                 (
                     c.d,
                     r.power,
-                    cast(MultivariateT, c.other_distribution).params.df
+                    cast(MultivariateT, c.other_distribution).params.df.item()
                     if isinstance(c.other_distribution, MultivariateT)
                     else "null",
                 )

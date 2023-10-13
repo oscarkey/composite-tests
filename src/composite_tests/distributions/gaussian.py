@@ -146,9 +146,7 @@ def mvn_fixed_cov(cov: Array):
             # an array back. We need an array back so we can reshape it, so the line
             # below is a hack to fix the type.
             array_logpdf = lambda x: jnp.array(multivariate_normal.logpdf(x, loc, cov))
-            return grad(to_scalar(array_logpdf), argnums=0)(
-                x.reshape(x.shape[0]), loc, cov
-            )
+            return grad(to_scalar(array_logpdf), argnums=0)(x.reshape(x.shape[0]))
 
         @staticmethod
         def log_prob_with_params(params: Array, x: Array) -> Array:
